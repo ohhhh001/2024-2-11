@@ -1,0 +1,38 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+
+vector<int> add(vector<int>&A,vector<int>&B)
+{
+    vector<int> c;
+    
+    int t=0;
+    for(int i=0;i<A.size()||i<B.size();i++)//一个数位对应一位，大的位数会对应0，如果小位数先结束,结束条件中不能带等号，因为没有边界情况，
+    {
+        if(i<A.size()) t+=A[i];//倒着进正着加2497->7947
+        if(i<B.size()) t+=B[i];//6022->2206,变为正序相加
+        c.push_back(t%10);//倒序存储
+        t/=10;
+    }
+    
+    if(t) c.push_back(1);
+    return c;
+    
+    
+}
+
+int main()
+{
+string a,b;
+vector<int> A,B;
+cin>>a>>b;
+for(int i=a.size()-1;i>=0;i--) A.push_back(a[i]-'0');//数组存储数字比正常数位要小一位
+for(int j=b.size()-1;j>=0;j--) B.push_back(b[j]-'0');
+
+auto c=add(A,B);
+
+for(int i=c.size()-1;i>=0;i--) cout<<c[i];
+cout<<endl;
+return 0;
+     
+ }
